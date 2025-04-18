@@ -37,6 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const candiesTrack = document.querySelector('.candies-track');
   const unicornGame = document.querySelector('.unicorn-game');
   
+  const restartListeningBtn = document.getElementById('restart-listening');
+  
   // Add translations
   const translations = {
     'en-US': {
@@ -866,6 +868,13 @@ document.addEventListener('DOMContentLoaded', () => {
     languageSelect.value = savedLanguage;
     selectedLanguage = savedLanguage;
   }
+  
+  // Add event listener for restart listening button
+  restartListeningBtn.addEventListener('click', () => {
+    manualInputBtn.style.display = 'none';
+    manualInputPanel.classList.remove('active');
+    startListening();
+  });
   
   // Initialize the app
   const init = () => {
