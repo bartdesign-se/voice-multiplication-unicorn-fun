@@ -125,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const initSpeechRecognition = () => {
     if (!isSpeechRecognitionSupported()) {
       console.error('Speech Recognition not supported');
-      // Show manual input button when speech recognition is not available
       manualInputBtn.style.display = 'block';
       return false;
     }
@@ -139,23 +138,47 @@ document.addEventListener('DOMContentLoaded', () => {
       voiceIndicator.style.display = 'flex';
     };
     
+    let isSecondAttempt = false;
+    
     recognition.onend = () => {
       voiceIndicator.style.display = 'none';
-      // If recognition ends without a result, we show manual input button
-      setTimeout(() => {
-        if (gameScreen.classList.contains('active') && manualInputBtn.style.display !== 'block') {
-          manualInputBtn.style.display = 'block';
-        }
-      }, 1000);
+      
+      // If this was the first attempt and no result was received
+      if (!isSecondAttempt && !hasReceivedResult) {
+        console.log('First attempt ended without result, starting second attempt');
+        isSecondAttempt = true;
+        setTimeout(() => {
+          try {
+            recognition.start();
+          } catch (e) {
+            console.error('Error starting second attempt:', e);
+            manualInputBtn.style.display = 'block';
+          }
+        }, 100);
+      } else {
+        // If this was the second attempt or we got a result, show manual input
+        setTimeout(() => {
+          if (gameScreen.classList.contains('active') && manualInputBtn.style.display !== 'block') {
+            manualInputBtn.style.display = 'block';
+          }
+        }, 1000);
+      }
     };
     
     recognition.onerror = (event) => {
       console.error('Speech recognition error', event.error);
+      if (event.error === 'no-speech' && !isSecondAttempt) {
+        // Don't show manual input yet if this is first attempt
+        return;
+      }
       voiceIndicator.style.display = 'none';
       manualInputBtn.style.display = 'block';
     };
     
+    let hasReceivedResult = false;
+    
     recognition.onresult = (event) => {
+      hasReceivedResult = true;
       const result = event.results[0][0].transcript.trim().toLowerCase();
       console.log('Speech recognized:', result);
       voiceIndicator.style.display = 'none';
@@ -220,12 +243,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const startListening = () => {
     if (recognition) {
       try {
+        hasReceivedResult = false;  // Reset the result flag
+        isSecondAttempt = false;    // Reset the attempt counter
         recognition.abort();
         recognition.start();
       } catch (e) {
         console.error('Error starting speech recognition:', e);
         setTimeout(() => {
-          try { recognition.start(); } catch (e) { 
+          try { 
+            recognition.start(); 
+          } catch (e) { 
             console.error('Retry failed:', e);
             manualInputBtn.style.display = 'block';
           }
