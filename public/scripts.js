@@ -1,10 +1,9 @@
-
 document.addEventListener('DOMContentLoaded', () => {
   // Global variables
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   let recognition = null;
   let selectedTable = 2;
-  let selectedLanguage = 'en-US';
+  let selectedLanguage = 'fr-FR';
   let currentMultiplications = [];
   let currentGame = {
     questions: [],
@@ -37,6 +36,85 @@ document.addEventListener('DOMContentLoaded', () => {
   const questionNumber = document.getElementById('question-number');
   const candiesTrack = document.querySelector('.candies-track');
   const unicornGame = document.querySelector('.unicorn-game');
+  
+  // Add translations
+  const translations = {
+    'en-US': {
+      title: 'Unicorn Multiplication Fun',
+      loading: 'Loading the game...',
+      settings: 'Settings',
+      statistics: 'Statistics',
+      chooseTable: 'Choose a Multiplication Table',
+      language: 'Language:',
+      back: '← Back',
+      score: 'Score:',
+      question: 'Question:',
+      listening: 'Listening...',
+      enterAnswer: 'Enter your answer',
+      submit: 'Submit',
+      correct: 'Correct!',
+      wrong: 'Wrong! The answer is',
+      tryAgain: "Sorry, I didn't catch that. Try again.",
+      gameStats: 'Game Summary',
+      correctAnswers: 'Correct answers:',
+      timeTaken: 'Time taken:',
+      seconds: 'seconds',
+      playAgain: 'Play Again',
+      backToMenu: 'Back to Menu',
+      noStats: 'No statistics available yet. Play some games to see your progress!',
+      rememberSelections: 'Remember selections',
+      selectTable: 'Select Multiplication Table',
+      activeMultiplications: 'Active Multiplications'
+    },
+    'fr-FR': {
+      title: 'Multiplication Amusante avec la Licorne',
+      loading: 'Chargement du jeu...',
+      settings: 'Paramètres',
+      statistics: 'Statistiques',
+      chooseTable: 'Choisissez une Table de Multiplication',
+      language: 'Langue:',
+      back: '← Retour',
+      score: 'Score:',
+      question: 'Question:',
+      listening: 'À l\'écoute...',
+      enterAnswer: 'Entrez votre réponse',
+      submit: 'Valider',
+      correct: 'Correct !',
+      wrong: 'Incorrect ! La réponse est',
+      tryAgain: "Désolé, je n'ai pas compris. Réessayez.",
+      gameStats: 'Résumé de la Partie',
+      correctAnswers: 'Réponses correctes:',
+      timeTaken: 'Temps écoulé:',
+      seconds: 'secondes',
+      playAgain: 'Rejouer',
+      backToMenu: 'Retour au Menu',
+      noStats: 'Aucune statistique disponible. Jouez pour voir votre progression !',
+      rememberSelections: 'Se souvenir des sélections',
+      selectTable: 'Sélectionner la Table de Multiplication',
+      activeMultiplications: 'Multiplications Actives'
+    }
+    // Add more translations for other languages
+  };
+  
+  // Set default language to French
+  selectedLanguage = 'fr-FR';
+  
+  // Create a function to get translations
+  const getTranslation = (key) => {
+    return translations[selectedLanguage]?.[key] || translations['fr-FR'][key];
+  };
+  
+  // Add spoken number display
+  const showSpokenNumber = (number) => {
+    const spokenNumberDisplay = document.createElement('div');
+    spokenNumberDisplay.className = 'spoken-number';
+    spokenNumberDisplay.textContent = number;
+    document.body.appendChild(spokenNumberDisplay);
+    
+    setTimeout(() => {
+      spokenNumberDisplay.remove();
+    }, 1000);
+  };
   
   // Check if Speech Recognition is supported
   const isSpeechRecognitionSupported = () => {
@@ -84,9 +162,10 @@ document.addEventListener('DOMContentLoaded', () => {
       
       const numericAnswer = parseVoiceResult(result);
       if (numericAnswer !== null) {
+        showSpokenNumber(numericAnswer);
         checkAnswer(numericAnswer);
       } else {
-        feedback.textContent = "Sorry, I didn't catch that. Try again.";
+        feedback.textContent = getTranslation('tryAgain');
         feedback.className = 'feedback';
         startListening();
       }
@@ -747,10 +826,11 @@ document.addEventListener('DOMContentLoaded', () => {
     selectedLanguage = e.target.value;
     localStorage.setItem('selectedLanguage', selectedLanguage);
     
-    // Reinitialize speech recognition with new language
     if (recognition) {
       recognition.lang = selectedLanguage;
     }
+    
+    updateUITranslations();
   });
   
   // Load saved language preference
@@ -764,6 +844,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const init = () => {
     generateTableButtons();
     initSpeechRecognition();
+    
+    // Set default language if no saved preference
+    const savedLanguage = localStorage.getItem('selectedLanguage');
+    if (!savedLanguage) {
+      languageSelect.value = 'fr-FR';
+      selectedLanguage = 'fr-FR';
+      localStorage.setItem('selectedLanguage', 'fr-FR');
+    }
+    
+    updateUITranslations();
   };
   
   init();
