@@ -1,0 +1,34 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <style>
+    .unicorn-body { fill: #F8E1FF; }
+    .unicorn-mane { fill: #D6BCFA; }
+    .unicorn-horn { fill: #9b87f5; }
+    .unicorn-eye { fill: #1A1F2C; }
+    .unicorn-blush { fill: #FEC6A1; opacity: 0.7; }
+    .unicorn-tail { fill: #D6BCFA; }
+  </style>
+  
+  <!-- Body -->
+  <path class="unicorn-body" d="M320 384c0 35.3-28.7 64-64 64s-64-28.7-64-64 28.7-64 64-64 64 28.7 64 64zm96-32c17.7 0 32-14.3 32-32s-14.3-32-32-32h-24c-8.8 0-16 7.2-16 16s7.2 16 16 16h16c8.8 0 16 7.2 16 16s-7.2 16-16 16h-16c-8.8 0-16 7.2-16 16s7.2 16 16 16h24zm-272-64c-17.7 0-32 14.3-32 32s14.3 32 32 32h24c8.8 0 16-7.2 16-16s-7.2-16-16-16h-16c-8.8 0-16-7.2-16-16s7.2-16 16-16h16c8.8 0 16-7.2 16-16s-7.2-16-16-16h-24z"/>
+  
+  <!-- Head -->
+  <path class="unicorn-body" d="M256 192c-35.3 0-64 28.7-64 64s28.7 64 64 64 64-28.7 64-64-28.7-64-64-64zm0 96c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32z"/>
+  
+  <!-- Horn -->
+  <path class="unicorn-horn" d="M256 64c-8.8 0-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V80c0-8.8-7.2-16-16-16z"/>
+  
+  <!-- Mane -->
+  <path class="unicorn-mane" d="M384 224c0-53-43-96-96-96-8.8 0-16 7.2-16 16v160c0 8.8 7.2 16 16 16 53 0 96-43 96-96z"/>
+  
+  <!-- Tail -->
+  <path class="unicorn-tail" d="M355.8 329.8c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6c25 25 25 65.5 0 90.5-25 25-65.5 25-90.5 0-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6c37.4 37.4 98.3 37.4 135.8 0 37.4-37.4 37.4-98.3 0-135.8z"/>
+  
+  <!-- Eyes -->
+  <circle class="unicorn-eye" cx="220" cy="224" r="8"/>
+  <circle class="unicorn-eye" cx="292" cy="224" r="8"/>
+  
+  <!-- Blush -->
+  <circle class="unicorn-blush" cx="220" cy="248" r="12"/>
+  <circle class="unicorn-blush" cx="292" cy="248" r="12"/>
+</svg>
