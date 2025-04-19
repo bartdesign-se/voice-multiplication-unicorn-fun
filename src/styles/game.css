@@ -1,0 +1,68 @@
+
+/* Game Screen Styles */
+.game-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+}
+
+.back-btn {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.back-btn:hover {
+  background-color: var(--tertiary-color);
+}
+
+.score-display, .question-count {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.game-area {
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.question-display {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.question {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.feedback {
+  font-size: 1.5rem;
+  min-height: 2rem;
+  transition: color 0.3s;
+}
+
+.feedback .answer {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.feedback.correct {
+  color: var(--correct-color);
+}
+
+.feedback.wrong {
+  color: var(--wrong-color);
+}

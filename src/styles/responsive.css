@@ -1,0 +1,38 @@
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .question {
+    font-size: 2rem;
+  }
+  
+  .game-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  
+  .game-header .back-btn {
+    align-self: flex-start;
+  }
+  
+  .candies-track {
+    height: 50px;
+  }
+  
+  .candy {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+  }
+  
+  .unicorn-game {
+    width: 80px;
+  }
+}
