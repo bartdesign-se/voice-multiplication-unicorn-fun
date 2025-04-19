@@ -76,3 +76,17 @@
 .number-key:active {
   transform: scale(0.95);
 }
+
+#keyboard-input-display {
+  grid-column: span 3;
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+  background: #fff;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 2px solid var(--primary-color);
+  min-height: 3rem;
+}
+

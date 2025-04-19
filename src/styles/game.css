@@ -31,10 +31,11 @@
 
 .game-area {
   width: 100%;
-  height: 70vh;
+  height: 60vh; /* Reduced from 70vh to make space for keyboard */
   display: flex;
   flex-direction: column;
   position: relative;
+  margin-bottom: 150px; /* Add space for the keyboard */
 }
 
 .question-display {
@@ -66,3 +67,4 @@
 .feedback.wrong {
   color: var(--wrong-color);
 }
+

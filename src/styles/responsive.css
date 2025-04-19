@@ -35,4 +35,19 @@
   .unicorn-game {
     width: 80px;
   }
+
+  .game-area {
+    height: 50vh;
+    margin-bottom: 180px;
+  }
+  
+  .number-keyboard {
+    padding: 0.5rem;
+  }
+  
+  .number-key {
+    padding: 0.5rem;
+    font-size: 1.2rem;
+  }
 }
+
