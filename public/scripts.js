@@ -54,6 +54,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Function to show the number keyboard during the game
+  function showNumberKeyboard() {
+    const keyboard = document.querySelector('.number-keyboard');
+    if (keyboard) {
+      keyboard.style.display = 'grid';
+    }
+  }
+
+  // Function to hide the number keyboard (if needed)
+  function hideNumberKeyboard() {
+    const keyboard = document.querySelector('.number-keyboard');
+    if (keyboard) {
+      keyboard.style.display = 'none';
+    }
+  }
+
   // Function to start the game
   function startGame(table) {
     currentTable = table;
@@ -65,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startTime = Date.now();
     updateScoreDisplay();
     updateQuestionDisplay();
+    showNumberKeyboard();
     showScreen('game-screen');
   }
 
@@ -381,6 +398,15 @@ document.addEventListener('DOMContentLoaded', () => {
   function initNumberKeyboard() {
     const keyboard = document.querySelector('.number-keyboard');
     let currentInput = '';
+    let displayInput = document.createElement('div');
+    displayInput.id = 'keyboard-input-display';
+    displayInput.style.cssText = `
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      font-weight: bold;
+    `;
+    keyboard.insertBefore(displayInput, keyboard.firstChild);
 
     keyboard.addEventListener('click', (e) => {
       if (!e.target.classList.contains('number-key')) return;
@@ -390,18 +416,21 @@ document.addEventListener('DOMContentLoaded', () => {
       switch(value) {
         case 'clear':
           currentInput = '';
+          displayInput.textContent = '';
           break;
         case 'enter':
           if (currentInput) {
             handleAnswer(parseInt(currentInput));
             currentInput = '';
+            displayInput.textContent = '';
           }
           break;
         default:
           if (currentInput.length < 3) {
             currentInput += value;
+            displayInput.textContent = currentInput;
           }
-        }
+      }
     });
   }
 
@@ -415,6 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
     generateTableButtons();
     loadActiveMultiplications();
     initNumberKeyboard();
+    showNumberKeyboard(); // Ensure keyboard is visible on initial load
     showScreen('main-menu');
   }
 
